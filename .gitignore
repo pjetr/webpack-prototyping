@@ -1,0 +1,8 @@
+node_modules/
+dist/
+src/*
+
+!src/main.scss
+!src/index.html
+!src/index.ts
+!src/entry.ts

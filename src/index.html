@@ -1,0 +1,136 @@
+<article class="markdown-body"><h1>
+<a id="user-content-webpack-prototyping" class="anchor" href="#webpack-prototyping" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Webpack Prototyping</h1>
+<h2>
+<a id="user-content-why" class="anchor" href="#why" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Why</h2>
+<p>At work we lost our network due to an outage, and I needed a tool to prototype, but I couldn't reach my usual suspects: <a href="https://codepen.io/pen" rel="nofollow">codepen.io</a> or <a href="http://jsbin.com/?html,css,js,output" rel="nofollow">JSBin</a>.</p>
+<p>I figured I could make a little tool to do the heavy lifting for me, and as a surplus I could even use my IDE to develop.</p>
+<h2>
+<a id="user-content-how-to-use-this" class="anchor" href="#how-to-use-this" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to use this</h2>
+<h3>
+<a id="user-content-prerequisites" class="anchor" href="#prerequisites" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>prerequisites</h3>
+<p>To get this to work you'll need:</p>
+<ul>
+<li><a href="https://nodejs.org/en/" rel="nofollow">Node.js</a></li>
+<li><a href="https://yarnpkg.com/" rel="nofollow">Yarn</a></li>
+<li>Some sort of IDE, the options are quire limitless, but here are a few you could pick
+<ul>
+<li>
+<a href="https://code.visualstudio.com/" rel="nofollow">Visual Studio Code</a> - <strong>free</strong>
+</li>
+<li>
+<a href="https://www.sublimetext.com/" rel="nofollow">Sublime Text</a> - <strong>free OR $80</strong>
+</li>
+<li>
+<a href="http://www.jetbrains.com/phpstorm/buy/#edition=personal" rel="nofollow">PhpStorm</a> - <strong>€89 / year</strong>
+</li>
+</ul>
+</li>
+</ul>
+<h3>
+<a id="user-content-getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting started</h3>
+<h4>
+<a id="user-content-1-get-the-repository-and-install-it" class="anchor" href="#1-get-the-repository-and-install-it" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1. Get the repository and install it</h4>
+<pre><code>git clone git@github.com:pjetr/webpack-prototyping.git
+cd webpack-prototyping
+
+yarn install
+</code></pre>
+<h4>
+<a id="user-content-2-working-on-a-prototype" class="anchor" href="#2-working-on-a-prototype" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2. Working on a prototype</h4>
+<p>Thera are multiple ways to do so, but I found I preferred to simply create a branch per prototype. You can use git to save your work and switch between different prototypes very easily. So that's what I'll show you here.</p>
+<p>Let's say we want to create a prototype for a menubar:</p>
+<pre><code>git checkout -b menubar
+
+yarn start
+</code></pre>
+<p>A new browser tab will open, and it will show you that the page is working.</p>
+<p>Now we can go into <code>src/index.html</code> and replace the contents with the following markup:</p>
+<pre><code>&lt;nav&gt;
+    &lt;section class="logo"&gt;
+        &lt;img src="https://placekitten.com/128/128" alt="ACME kittens"&gt;
+    &lt;/section&gt;
+    &lt;section class="navigation"&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#/news"&gt;News&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#/about"&gt;About ACME kittens&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#/contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/section&gt;
+&lt;/nav&gt;
+</code></pre>
+<p>As soon as you save, the browser tab will refresh and show you a weird looking navigation. Time to add some styling. open <code>src/main.scss</code> and replace the contents with the following <em>Sass</em>.</p>
+<pre><code>html {
+  background: #333;
+
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+nav {
+  display: flex;
+  position: relative;
+  align-items: center;
+
+  width: 100%;
+  margin: 0;
+  padding: 15px;
+  background-color: goldenrod;
+
+  .logo {
+    width: 128px;
+    position: relative;
+    margin-right: 15px;
+    margin-top: -35px;
+
+    img {
+      position: absolute;
+      width: 128px;
+      border: 5px solid goldenrod;
+      border-radius: 5px;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.23);
+    }
+  }
+
+  .navigation {
+    flex: 1;
+    ul {
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+    li {
+      list-style-type: none;
+      display: block;
+      margin: 0 5px;
+    }
+
+    a {
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 10px;
+
+      &amp;:hover,
+      &amp;:active {
+        border-bottom: 5px solid white;
+      }
+    }
+  }
+}
+</code></pre>
+<p>That looks more like it!</p>
+<h3>
+<a id="user-content-saving-and-switching-to-another-prototype" class="anchor" href="#saving-and-switching-to-another-prototype" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Saving and switching to another prototype</h3>
+<p>Well that's just basic <em>Git</em>:</p>
+<pre><code>git add --all
+git commit -m "Prototype Menu-Bar copy pasted some stuff"
+git checkout master
+</code></pre>
+<p>And now you're ready to go again.</p>
+<p>Happy prototyping!</p>
+</article>
